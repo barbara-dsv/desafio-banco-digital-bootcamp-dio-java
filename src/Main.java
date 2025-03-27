@@ -1,30 +1,32 @@
 import jdk.jshell.EvalException;
 
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
-        Cliente barbara = new Cliente();
-        barbara.setNome("Bárbara");
+        Banco banco = new Banco();
+        ArrayList<Conta> contas = new ArrayList<>();
 
-        Conta cc = new ContaCorrente(barbara);
-        Conta cp = new ContaPoupanca(barbara);
+        Cliente barbara = new Cliente("Bárbara","07789563155","Rua moraujo, 376", "barbara@gmail.com", "85998546312");
 
-        Cliente Valeria = new Cliente();
-        Valeria.setNome("Valéria");
+
+        Conta contaCorrenteBarbara = new ContaCorrente(barbara);
+        Conta contaPoupancaBarbara = new ContaPoupanca(barbara);
+
+        contas.add(contaCorrenteBarbara);
+        contas.add(contaPoupancaBarbara);
+
+        Cliente Valeria = new Cliente("Valéria", "45218759545", "Rua 17", "valeria@gmail.com", "85978985463");
+
 
         Conta contaCorrenteValeria = new ContaCorrente(Valeria);
         Conta contaPoupancaValeria = new ContaPoupanca(Valeria);
-        contaCorrenteValeria.depositar(1000);
-        contaCorrenteValeria.transferir(cc, 50);
-        contaCorrenteValeria.extrato();
 
+        contas.add(contaCorrenteValeria);
+        contas.add(contaPoupancaValeria);
 
+        banco.setContas(contas);
 
-        cc.depositar(100);
-        cc.transferir(cp,100);
-
-    cc.extrato();
-    cp.extrato();
-
-
+        banco.listarClientes();
     }
 }
