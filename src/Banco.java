@@ -10,7 +10,17 @@ public class Banco {
             System.out.println("Ná há clientes cadastrados");
             return;
         }
-        contas.stream().map(conta -> conta.getCliente().getNome()).distinct().forEach(System.out::println);
+        contas.stream().map(conta -> {
+            Cliente cliente = conta.getCliente();
+            return String.format(
+                    "Nome: %s\nCPF: %s\nEndereço: %s\nTelefone: %s\nEmail: %s\n",
+                    cliente.getNome(),
+                    cliente.getCpf(),
+                    cliente.getEndereco(),
+                    cliente.getTelefone(),
+                    cliente.getEmail()
+            );
+        }).distinct().forEach(System.out::println);
     }
 
     public String getNome() {
