@@ -15,7 +15,12 @@ public abstract class Conta implements IConta{
 
     @Override
     public void sacar(double valor) {
+        if(saldo < valor){
+            System.out.println("Não há saldo suficiente para o saque. ");
+            return;
+        }
         this.saldo -= valor;
+        System.out.println("Saque realizado com sucesso.");
     }
 
     @Override
@@ -25,11 +30,23 @@ public abstract class Conta implements IConta{
 
     @Override
     public void transferir(Conta contaDestino, double valor) {
+
+        if(saldo < valor){
+            System.out.println("Não há saldo suficiente para realizar a transferência.");
+            return;
+        }
         this.sacar(valor);
         contaDestino.depositar(valor);
+        System.out.println("Transferência realizada com sucesso.");
+
     }
 
-
+    protected void imprimirInfosBasicas() {
+        System.out.println(String.format("Titular: %s", this.cliente.getNome()));
+        System.out.println(String.format("Agência: %d", this.agencia));
+        System.out.println(String.format("Número: %d", this.numero));
+        System.out.println(String.format("Saldo: %.2f", this.saldo));
+    }
 
     public int getAgencia() {
         return agencia;
@@ -43,10 +60,9 @@ public abstract class Conta implements IConta{
         return saldo;
     }
 
-    protected void imprimirInfosBasicas() {
-        System.out.println(String.format("Titular: %s", this.cliente.getNome()));
-        System.out.println(String.format("Agência: %d", this.agencia));
-        System.out.println(String.format("Número: %d", this.numero));
-        System.out.println(String.format("Saldo: %.2f", this.saldo));
+    public Cliente getCliente() {
+        return cliente;
     }
+
+
 }
