@@ -23,6 +23,26 @@ public class Banco {
         }).distinct().forEach(System.out::println);
     }
 
+    public void listarContasPoupancas (){
+        List<Conta> contasPoupancas = contas.stream().filter(conta -> conta instanceof ContaPoupanca).toList();
+        if(contasPoupancas.isEmpty()) {
+            System.out.println("Não há contas poupanças cadastradas");
+        } else {
+            System.out.println("Quantidade de contas poupanças: " + contasPoupancas.size());
+            contasPoupancas.forEach(conta -> conta.extrato());
+        }
+    }
+
+    public void listarContasCorrentes (){
+        List<Conta> contasCorrentes = contas.stream().filter(conta -> conta instanceof  ContaCorrente).toList();
+        if(contasCorrentes.isEmpty()){
+            System.out.println("Não há contas correntes cadastradas");
+        } else {
+            System.out.println("Quantidade de contas correntes: " + contasCorrentes.size());
+            contasCorrentes.forEach(conta -> conta.extrato());
+        }
+    }
+
     public String getNome() {
         return nome;
     }
