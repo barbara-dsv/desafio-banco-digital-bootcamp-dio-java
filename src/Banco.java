@@ -43,6 +43,14 @@ public class Banco {
         }
     }
 
+    public void saldoDeTodasContas (){
+        double soma = contas.stream().mapToDouble(conta -> conta.getSaldo()).sum();
+        if(soma <= 0 ){
+            System.out.println("Não há saldo no banco");
+        } else {
+            System.out.println("Total de saldo de todas as contas: R$ " + soma);
+        }
+    }
     public String getNome() {
         return nome;
     }
